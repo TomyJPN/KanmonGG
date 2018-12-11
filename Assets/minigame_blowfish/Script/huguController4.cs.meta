@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a9961fe8700614e4e82c0fdd419f9607
+timeCreated: 1534664936
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Blowfish2: {fileID: 21300000, guid: 5442084142c080f4c870c22cc21f608e, type: 3}
+  - Blowfish3: {fileID: 21300000, guid: 3685cffd96335b34ca545025421b23e9, type: 3}
+  - Blowfish4: {fileID: 21300000, guid: 2b1b21b04a03b584cb2cae1622722b55, type: 3}
+  - Blowfish5: {fileID: 21300000, guid: ecc87c8a0d1d3844d888265e18064103, type: 3}
+  - Blowfish6: {fileID: 21300000, guid: c78a81e69226e5f40ac19e58d2d2caa5, type: 3}
+  - Blowfish7: {fileID: 21300000, guid: 93932310b85b23e4d8d39ddbf268ff9d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
