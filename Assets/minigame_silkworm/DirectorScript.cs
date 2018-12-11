@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class DirectorScript : MonoBehaviour {
 
   int spawnTime = 0;
-  float totalTime;
+  public float totalTime;
 
   public float score = 0;
   public GameObject scoreTextObj;
   public GameObject timeTextObj;
+  public GameObject resultObj;
+
+  public static bool isEnd;
 
   float x, y;
   GameObject go;
@@ -19,20 +22,25 @@ public class DirectorScript : MonoBehaviour {
 
   // Use this for initialization
   void Start() {
-    totalTime = 40;
+    //totalTime = 40;
+    isEnd = false;
   }
 
   // Update is called once per frame
   void Update() {
-    spawnTime++;
-    totalTime -= Time.deltaTime;
-    timeTextObj.GetComponent<Text>().text = "time:" + totalTime.ToString("F2");
-
+    if (!isEnd) {
+      spawnTime++;
+      totalTime -= Time.deltaTime;
+    }
+    else {
+      totalTime = 0;
+    }
+      timeTextObj.GetComponent<Text>().text = "time:" + totalTime.ToString("F2");
     //スコア書き換え
     //this.scoreText.GetComponent<Text>().text = this.score.ToString("F0");
 
     //桑の葉生成
-    if (spawnTime == 50) {
+    if (spawnTime == 50 && !isEnd) {
 
       int i = Random.Range(0, 2);
       this.go = Instantiate(leaf[i]) as GameObject;
@@ -55,11 +63,17 @@ public class DirectorScript : MonoBehaviour {
     }
 
     //40秒で終了の条件分岐
-    if (totalTime<=0) {
-      Debug.Log("Finish");
-      mainSystem.isGameclear = true;
-      Screen.orientation = ScreenOrientation.Portrait;
-      SceneManager.LoadScene("minigameMenu");
+    if (totalTime<=0 && !isEnd) {
+      isEnd = true;
+      resultObj.SetActive(true);
+      if (score >= 50) {
+        mainSystem.isGameclear = true;
+        resultObj.transform.Find("Text_message").transform.GetComponent<Text>().text = "Score:" + score.ToString() + "\nノルマクリア！";
+      }
+      else {
+        resultObj.transform.Find("Text_message").transform.GetComponent<Text>().text = "Score:" + score.ToString() + "\nノルマ未達成";
+        resultObj.transform.Find("Button_restart").transform.GetComponent<Button>().interactable = true;
+      }
     }
 
   }
@@ -69,8 +83,11 @@ public class DirectorScript : MonoBehaviour {
     //スコア書き換え
     this.scoreTextObj.GetComponent<Text>().text = "スコア:"+this.score.ToString("F0");
   }
-
-  private void LeafGenereta() {
-
+  public void restart() {
+    Application.LoadLevel("silkwormGame"); //再読み込み
+  }
+  public void endGame() {
+    Screen.orientation = ScreenOrientation.Portrait;
+    SceneManager.LoadScene("minigameMenu");
   }
 }

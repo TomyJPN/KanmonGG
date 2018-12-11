@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class huguDirector : MonoBehaviour {
 
-    public int i = 0;
+  public int i = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+  // Use this for initialization
+  void Start() {
+
+  }
+
+  // Update is called once per frame
+  void Update() {
+
+  }
 }

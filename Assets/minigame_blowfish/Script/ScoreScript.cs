@@ -22,6 +22,6 @@ public class ScoreScript : MonoBehaviour {
 
             length = (((int)this.player.transform.position.x + 7) * (i + 1));
             
-            this.score.GetComponent<Text>().text = "Score:" + length.ToString("D4");
+            this.score.GetComponent<Text>().text = "スコア:" + length.ToString("D4");
 	}
 }

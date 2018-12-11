@@ -33,7 +33,7 @@ public class LeafScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && !DirectorScript.isEnd)
         {
             directorScript.scoreAdd();
             Destroy(gameObject);

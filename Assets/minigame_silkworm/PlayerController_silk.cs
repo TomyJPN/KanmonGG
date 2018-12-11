@@ -22,7 +22,7 @@ public class PlayerController_silk : MonoBehaviour {
 	void Update () {
 
         //Player移動
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !DirectorScript.isEnd)
         {
             endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
