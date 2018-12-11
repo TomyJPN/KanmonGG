@@ -6,31 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class DirectorScript : MonoBehaviour {
 
-  int deltatime = 0;
+  int spawnTime = 0;
+  float totalTime;
 
   public float score = 0;
-  GameObject scoreText;
+  public GameObject scoreTextObj;
+  public GameObject timeTextObj;
 
   float x, y;
   GameObject go;
   public GameObject[] leaf = new GameObject[2];
 
-  int time = 0;
-
   // Use this for initialization
   void Start() {
-    this.scoreText = GameObject.Find("Score");
+    totalTime = 40;
   }
 
   // Update is called once per frame
   void Update() {
-    this.deltatime++;
+    spawnTime++;
+    totalTime -= Time.deltaTime;
+    timeTextObj.GetComponent<Text>().text = "time:" + totalTime.ToString("F2");
 
     //スコア書き換え
     //this.scoreText.GetComponent<Text>().text = this.score.ToString("F0");
 
     //桑の葉生成
-    if (deltatime == 50) {
+    if (spawnTime == 50) {
 
       int i = Random.Range(0, 2);
       this.go = Instantiate(leaf[i]) as GameObject;
@@ -49,12 +51,11 @@ public class DirectorScript : MonoBehaviour {
       }
       this.go.transform.localScale = new Vector3(this.x * 0.5f, this.y * 0.5f, 0);
 
-      this.deltatime = 0;
+      this.spawnTime = 0;
     }
 
-    //60秒で終了の条件分岐
-    this.time++;
-    if (this.time >= 3600) {
+    //40秒で終了の条件分岐
+    if (totalTime<=0) {
       Debug.Log("Finish");
       mainSystem.isGameclear = true;
       Screen.orientation = ScreenOrientation.Portrait;
@@ -66,7 +67,7 @@ public class DirectorScript : MonoBehaviour {
   public void scoreAdd() {
     this.score++;
     //スコア書き換え
-    this.scoreText.GetComponent<Text>().text = this.score.ToString("F0");
+    this.scoreTextObj.GetComponent<Text>().text = "スコア:"+this.score.ToString("F0");
   }
 
   private void LeafGenereta() {

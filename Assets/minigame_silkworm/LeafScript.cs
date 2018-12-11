@@ -14,6 +14,7 @@ public class LeafScript : MonoBehaviour {
 	void Start () {
     rg = this.gameObject.GetComponent<Rigidbody2D>();
     rg.AddTorque(2f, ForceMode2D.Impulse);
+    rg.drag = Random.Range(2f,5f);
         Director = GameObject.Find("Director");
         directorScript = Director.GetComponent<DirectorScript>();
 
