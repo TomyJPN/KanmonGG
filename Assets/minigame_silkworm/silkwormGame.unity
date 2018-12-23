@@ -1349,6 +1349,7 @@ MonoBehaviour:
   scoreTextObj: {fileID: 1600188718}
   timeTextObj: {fileID: 495416666}
   resultObj: {fileID: 912209826}
+  silkworm: {fileID: 1935925390}
   leaf:
   - {fileID: 1423080472210816, guid: f9e3f17fd7c23694fb1189a072a35146, type: 2}
   - {fileID: 1581023419940266, guid: 931c809fcf024464690fb541684da10f, type: 2}
@@ -1954,3 +1955,8 @@ Transform:
   m_Father: {fileID: 640076351}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -51.2}
+--- !u!1 &1935925390 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1517883668953214, guid: c3c94b877c316a44ba1f70943f4961a2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1799614496}

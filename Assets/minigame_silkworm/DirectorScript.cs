@@ -13,6 +13,7 @@ public class DirectorScript : MonoBehaviour {
   public GameObject scoreTextObj;
   public GameObject timeTextObj;
   public GameObject resultObj;
+  public GameObject silkworm;
 
   public static bool isEnd;
 
@@ -31,6 +32,9 @@ public class DirectorScript : MonoBehaviour {
     if (!isEnd) {
       spawnTime++;
       totalTime -= Time.deltaTime;
+      if (score == 35) {
+        silkworm.GetComponent<SpriteRenderer>().sprite = mainSystem.charaSprits[8];
+      }
     }
     else {
       totalTime = 0;
@@ -63,10 +67,10 @@ public class DirectorScript : MonoBehaviour {
     }
 
     //40秒で終了の条件分岐
-    if (totalTime<=0 && !isEnd) {
+    if ((totalTime<=0 || score==35)&& !isEnd) {
       isEnd = true;
       resultObj.SetActive(true);
-      if (score >= 50) {
+      if (score >= 35) {
         mainSystem.isGameclear = true;
         resultObj.transform.Find("Text_message").transform.GetComponent<Text>().text = "Score:" + score.ToString() + "\nノルマクリア！";
       }
