@@ -14,19 +14,24 @@ public class map_activity : MonoBehaviour {
   //public GameObject canvas;  //canvas
 
   public GameObject Player;
-  //public GameObject moveUIpref;
-  //public GameObject moveUI;
-  
+  public GameObject controller;
+  private bool onController;
+  Vector3 controllerPos;
+
 
   // Use this for initialization
   void Start() {
     if (mainSystem.isGameclear) {
       tapCharactor(mainSystem.nowCharaID);
     }
+    onController = false;
   }
 
   // Update is called once per frame
   void Update() {
+    if (onController) {
+      controller.transform.position = Input.mousePosition;
+    }
     /*if (Input.GetMouseButtonDown(0)) {  //押された瞬間
       moveUI = Instantiate(moveUIpref) as GameObject;
       moveUI.transform.parent = canvas.transform;
@@ -109,5 +114,16 @@ public class map_activity : MonoBehaviour {
 
   public void startGame() {
     SceneManager.LoadScene("minigameMenu");
+  }
+
+  //コントローラーを押したとき
+  public void onClickController() {
+    onController = true;
+    controllerPos = controller.transform.position;
+  }
+  //コントローラーを離したとき
+  public void outClickController() {
+    onController = false;
+    controller.transform.position = controllerPos;
   }
 }
