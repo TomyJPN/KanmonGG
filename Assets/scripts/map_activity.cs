@@ -30,7 +30,17 @@ public class map_activity : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (onController) {
-      controller.transform.position = Input.mousePosition;
+      float dis = getDistance(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
+      if (dis < 80f) {  //範囲内の操作
+        Debug.Log(getDistance(controllerPos.x,controllerPos.y,Input.mousePosition.x,Input.mousePosition.y));
+        controller.transform.position = Input.mousePosition;
+      }
+      else {          //範囲外にマウスをやった時
+        double rad = getRadian(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
+        float y2 = (float)Math.Sin(rad) * 80; //角度と距離から，指定半径の座標を出す
+        float x2 = (float)Math.Cos(rad) * 80;
+        controller.transform.position = new Vector2(x2+controllerPos.x, y2+controllerPos.y);
+      }
     }
     /*if (Input.GetMouseButtonDown(0)) {  //押された瞬間
       moveUI = Instantiate(moveUIpref) as GameObject;
@@ -125,5 +135,20 @@ public class map_activity : MonoBehaviour {
   public void outClickController() {
     onController = false;
     controller.transform.position = controllerPos;
+  }
+  //2点間の距離
+  protected float getDistance(double x, double y, double x2, double y2) {
+    double distance = Math.Sqrt((x2 - x) * (x2 - x) + (y2 - y) * (y2 - y));
+
+    return (float)distance;
+  }
+  //2点間の角度
+  protected double getRadian(double x, double y, double x2, double y2) {
+    double radian = Math.Atan2(y2 - y, x2 - x);
+    return radian;
+  }
+  //radianをdegreeに変換
+  protected double ToAngle(double radian) {
+    return (double)(radian * 180 / Math.PI);
   }
 }
