@@ -17,6 +17,8 @@ public class map_activity : MonoBehaviour {
   public GameObject controller;
   private bool onController;
   Vector3 controllerPos;
+  public GameObject player;
+  private Rigidbody2D playerRg;
 
 
   // Use this for initialization
@@ -25,60 +27,29 @@ public class map_activity : MonoBehaviour {
       tapCharactor(mainSystem.nowCharaID);
     }
     onController = false;
+    playerRg = player.GetComponent<Rigidbody2D>();
   }
 
   // Update is called once per frame
   void Update() {
+    float dis;
+    double rad= getRadian(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
     if (onController) {
-      float dis = getDistance(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
+      dis = getDistance(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
       if (dis < 80f) {  //範囲内の操作
-        Debug.Log(getDistance(controllerPos.x,controllerPos.y,Input.mousePosition.x,Input.mousePosition.y));
         controller.transform.position = Input.mousePosition;
       }
       else {          //範囲外にマウスをやった時
-        double rad = getRadian(controllerPos.x, controllerPos.y, Input.mousePosition.x, Input.mousePosition.y);
         float y2 = (float)Math.Sin(rad) * 80; //角度と距離から，指定半径の座標を出す
         float x2 = (float)Math.Cos(rad) * 80;
         controller.transform.position = new Vector2(x2+controllerPos.x, y2+controllerPos.y);
+        dis = 80;
       }
+      float y = (float)Math.Sin(rad) * dis; //角度と距離から，指定半径の座標を出す
+      float x = (float)Math.Cos(rad) * dis;
+      playerRg.velocity = new Vector2(x, y);  //プレイヤー移動
     }
-    /*if (Input.GetMouseButtonDown(0)) {  //押された瞬間
-      moveUI = Instantiate(moveUIpref) as GameObject;
-      moveUI.transform.parent = canvas.transform;
-      moveUI.transform.position = Input.mousePosition;
-      //worldPos = Camera.main.ScreenToWorldPoint(startPos);
-      //moveUI.transform.position = new Vector3(worldPos.x, worldPos.y, 10.0f);
-    }
-    if (Input.GetMouseButton(0)) {
-      this.movePos = Input.mousePosition;
-      if (this.movePos.y > this.startPos.y && transform.position.y < 3.8f) {
-        transform.Translate(0, 0.1f, 0);
-        for (i = 0; i < scoreScript.i; i++) {
-          StartCoroutine(DelayMethod(15 * (i + 1), i, 1));
-        }
-      }
-      if (this.movePos.y < this.startPos.y && transform.position.y > -3.8f) {
-        transform.Translate(0, -0.1f, 0);
-        for (i = 0; i < scoreScript.i; i++) {
-          StartCoroutine(DelayMethod(15 * (i + 1), i, -1));
-        }
-      }
-
-      moveUI.transform.Translate(0.1f + (0.01f * scoreScript.i), 0, 0);
-      if (j != scoreScript.i) {
-        moveUI.transform.Translate(-0.01f, 0, 0);
-        k++;
-        if (k == 50) {
-          j++;
-          k = 0;
-        }
-      }
-
-    }
-    if (Input.GetMouseButtonUp(0)) {
-      //this.startPos = this.movePos;
-      Destroy(moveUI);
-    }*/
+    
   }
 
 
@@ -135,6 +106,7 @@ public class map_activity : MonoBehaviour {
   public void outClickController() {
     onController = false;
     controller.transform.position = controllerPos;
+    playerRg.velocity = new Vector2(0, 0);
   }
   //2点間の距離
   protected float getDistance(double x, double y, double x2, double y2) {
