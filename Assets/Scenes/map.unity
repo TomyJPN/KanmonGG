@@ -238,7 +238,9 @@ GameObject:
   - component: {fileID: 100996031}
   - component: {fileID: 100996030}
   - component: {fileID: 100996029}
+  - component: {fileID: 100996034}
   - component: {fileID: 100996032}
+  - component: {fileID: 100996033}
   m_Layer: 5
   m_Name: player
   m_TagString: Untagged
@@ -331,6 +333,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &100996033
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100996027}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 24.45
+--- !u!114 &100996034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100996027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a897c1fcf28db4699b73c273457cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionButton: {fileID: 2008915849}
 --- !u!1 &102330607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,9 +2191,10 @@ GameObject:
   - component: {fileID: 1247789114}
   - component: {fileID: 1247789113}
   - component: {fileID: 1247789115}
+  - component: {fileID: 1247789116}
   m_Layer: 5
   m_Name: 1
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2250,6 +2280,21 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!58 &1247789116
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1247789111}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 111.9
 --- !u!1 &1281644362
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,9 +2396,10 @@ GameObject:
   - component: {fileID: 1509291883}
   - component: {fileID: 1509291882}
   - component: {fileID: 1509291881}
+  - component: {fileID: 1509291884}
   m_Layer: 5
   m_Name: 11
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2373,7 +2419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 218.6, y: 492.7}
+  m_AnchoredPosition: {x: 233.7, y: 468}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1509291881
@@ -2439,6 +2485,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1509291879}
+--- !u!58 &1509291884
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1509291879}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 111.9
 --- !u!1 &1543770308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,9 +2695,10 @@ GameObject:
   - component: {fileID: 1631092315}
   - component: {fileID: 1631092314}
   - component: {fileID: 1631092313}
+  - component: {fileID: 1631092316}
   m_Layer: 5
   m_Name: 6
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2722,6 +2784,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1631092311}
+--- !u!58 &1631092316
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1631092311}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 111.9
 --- !u!1 &1636685935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,9 +2937,10 @@ GameObject:
   - component: {fileID: 1773474045}
   - component: {fileID: 1773474044}
   - component: {fileID: 1773474043}
+  - component: {fileID: 1773474046}
   m_Layer: 5
   m_Name: "\uFF14"
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2948,6 +3026,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1773474041}
+--- !u!58 &1773474046
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1773474041}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 111.9
 --- !u!1 &1823081068
 GameObject:
   m_ObjectHideFlags: 0
@@ -3105,9 +3198,10 @@ GameObject:
   - component: {fileID: 1848390099}
   - component: {fileID: 1848390098}
   - component: {fileID: 1848390097}
+  - component: {fileID: 1848390100}
   m_Layer: 5
   m_Name: 21
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3193,6 +3287,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1848390095}
+--- !u!58 &1848390100
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848390095}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 111.9
 --- !u!1 &1891929948
 GameObject:
   m_ObjectHideFlags: 0
@@ -3287,7 +3396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2008915850
 RectTransform:
   m_ObjectHideFlags: 0

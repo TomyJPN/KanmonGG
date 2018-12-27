@@ -19,6 +19,7 @@ public class map_activity : MonoBehaviour {
   Vector3 controllerPos;
   public GameObject player;
   private Rigidbody2D playerRg;
+  
 
 
   // Use this for initialization
@@ -123,4 +124,6 @@ public class map_activity : MonoBehaviour {
   protected double ToAngle(double radian) {
     return (double)(radian * 180 / Math.PI);
   }
+
+  
 }
