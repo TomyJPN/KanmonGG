@@ -19,8 +19,6 @@ public class map_activity : MonoBehaviour {
   Vector3 controllerPos;
   public GameObject player;
   private Rigidbody2D playerRg;
-  
-
 
   // Use this for initialization
   void Start() {
@@ -92,6 +90,10 @@ public class map_activity : MonoBehaviour {
       storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
       mainSystem.isGameclear = false;
     }
+  }
+
+  public void onActionButton() {
+    tapCharactor(int.Parse(player.GetComponent<map_player>().nearCharaID));
   }
 
   public void startGame() {
