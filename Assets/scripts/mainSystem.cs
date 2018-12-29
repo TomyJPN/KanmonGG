@@ -44,6 +44,10 @@ public class mainSystem : MonoBehaviour {
     Debug.Log(storyJson);
     storyInstance = JsonHelper.FromJson<Story>(storyJson);
     Debug.Log("回線丼："+storyInstance[0].story);*/
+
+    saveLoad testData=new saveLoad();
+    //testData.Save();
+    testData.Load();
   }
 
   // Update is called once per frame
