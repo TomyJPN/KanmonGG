@@ -40,7 +40,7 @@ public class album_activity : MonoBehaviour {
   void setDescription(string str) {
 
     descriptionObj.SetActive(true);
-    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description;
+    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description+mainSystem.kaihou[int.Parse(str)];
   }
 
   public void activeDescription() {
