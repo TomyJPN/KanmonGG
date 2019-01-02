@@ -14,7 +14,7 @@ public class album_activity : MonoBehaviour {
   public GameObject descriptionObj;
   private Text text;
 
-  private int[] storyIDs = {1,4,6,11,21 };
+  private int[] storyIDs = {0,3,5,10,20 };
 
   // Use this for initialization
   void Start() {
@@ -32,6 +32,7 @@ public class album_activity : MonoBehaviour {
 
       string tmp = i.ToString();//一時変数
       Item.GetComponent<Button>().onClick.AddListener(() => { setDescription(tmp); }); //ラムダ式とかいうやつhttps://toshusai.hatenablog.com/entry/2017/11/08/213641
+
     }
     //ストーリーの生成
     for(int i = 0; i < storyIDs.Length; i++) {
@@ -43,6 +44,10 @@ public class album_activity : MonoBehaviour {
       //画像
       Image btnImage = Item.transform.Find("Image").gameObject.GetComponent<Image>();
       if (mainSystem.charaSprits.Length > i) btnImage.sprite = mainSystem.charaSprits[storyIDs[i]]; //これなんだっけ
+
+      string tmp = storyIDs[i].ToString();
+      Item.GetComponent<Button>().onClick.AddListener(() => { playStory(tmp); }); //ラムダ式とかいうやつhttps://toshusai.hatenablog.com/entry/2017/11/08/213641
+
     }
     storyLay.SetActive(false);  //storyレイヤ
   }
@@ -52,10 +57,18 @@ public class album_activity : MonoBehaviour {
 
   }
 
+  //オンクリックで呼び出される．説明文を設定
   void setDescription(string str) {
 
     descriptionObj.SetActive(true);
     text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description+mainSystem.kaihou[int.Parse(str)];
+  }
+
+  void playStory(string str) {
+    Debug.Log(str);
+    mainSystem.storyPlay = true;
+    mainSystem.nowCharaID = int.Parse(str)+1;
+    SceneManager.LoadScene("map");
   }
 
   public void activeDescription() {

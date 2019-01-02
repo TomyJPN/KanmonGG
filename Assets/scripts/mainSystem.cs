@@ -14,6 +14,7 @@ public class mainSystem : MonoBehaviour {
   public static int nowCharaID;   //現在進行中のストーリーID
   public static bool isGameclear; //ミニゲームをクリアしたか
   public static bool[] kaihou=new bool[31];  //解放したか
+  public static bool storyPlay;
 
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
@@ -38,6 +39,7 @@ public class mainSystem : MonoBehaviour {
       
     }*/
     isGameclear = false;
+    storyPlay = false;
 
     //storyJsonファイルの読み込み
     /*storyJson = File.ReadAllText("Assets/game_Data/storyData.json");
