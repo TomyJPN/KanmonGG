@@ -4,16 +4,17 @@ using Newtonsoft.Json;  //http://spi8823.hatenablog.com/entry/2016/04/16/001641
 //https://qiita.com/ryouhei_de/items/4551ee549d2cfe81c72f より
 
 class saveLoad : MonoBehaviour {
-  public class CharacterData //キャラクターデータクラス
+  public class saveData //キャラクターデータクラス
   {
-    public string userName = "デザートイーグル";
+    public bool[] kaihou;
+    /*public string userName = "デザートイーグル";
     public int userLV = 50;
     public int birthdayYear = 1979;
     public string comment = "中二病の象徴";
-    public int[] haitetsu = { 1, 2 };
+    public int[] haitetsu = { 1, 2 };*/
   }
 
-  CharacterData chara = new CharacterData();
+  public saveData chara=new saveData(); //右辺こうしないとエラー出る
 
   /// <summary>
   /// データの保存を行う
@@ -26,7 +27,7 @@ class saveLoad : MonoBehaviour {
       PlayerPrefs.SetString("playerData", jsonStr); //PlayerPrefsにデータを保存　　第1引数は任意
     }
     else {
-      Debug.LogError("キャラクターデータがないよ！");
+      Debug.LogError("セーブデータがないよ！");
     }
   }
 
@@ -41,7 +42,7 @@ class saveLoad : MonoBehaviour {
       Debug.Log("セーブデータはないよ！");
     }
     else {
-      CharacterData loadClass = JsonUtility.FromJson<CharacterData>(loadJsonStr);
+      saveData loadClass = JsonUtility.FromJson<saveData>(loadJsonStr);
     }
 
   }

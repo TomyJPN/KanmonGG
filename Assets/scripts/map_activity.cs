@@ -22,7 +22,7 @@ public class map_activity : MonoBehaviour {
 
   // Use this for initialization
   void Start() {
-    if (mainSystem.isGameclear) {
+    if (mainSystem.isGameclear || mainSystem.storyPlay) {
       tapCharactor(mainSystem.nowCharaID);
     }
     onController = false;
@@ -89,9 +89,11 @@ public class map_activity : MonoBehaviour {
       storyBack.SetActive(false);
       storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
       mainSystem.isGameclear = false;
+      mainSystem.storyPlay = false;
     }
   }
 
+  //ビックリマークのアクションボタン
   public void onActionButton() {
     tapCharactor(int.Parse(player.GetComponent<map_player>().nearCharaID));
   }

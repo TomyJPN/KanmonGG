@@ -13,6 +13,8 @@ public class mainSystem : MonoBehaviour {
   public static Sprite[] charaSprits;
   public static int nowCharaID;   //現在進行中のストーリーID
   public static bool isGameclear; //ミニゲームをクリアしたか
+  public static bool[] kaihou=new bool[31];  //解放したか
+  public static bool storyPlay;
 
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
@@ -37,6 +39,7 @@ public class mainSystem : MonoBehaviour {
       
     }*/
     isGameclear = false;
+    storyPlay = false;
 
     //storyJsonファイルの読み込み
     /*storyJson = File.ReadAllText("Assets/game_Data/storyData.json");
@@ -47,7 +50,14 @@ public class mainSystem : MonoBehaviour {
 
     saveLoad testData=new saveLoad();
     //testData.Save();
+    for(int i = 0; i < 31; i++) {
+      kaihou[i] = false;
+    }
+    kaihou[0] = true;
+    testData.chara.kaihou = kaihou;
+    testData.Save();
     testData.Load();
+    kaihou = testData.chara.kaihou;
   }
 
   // Update is called once per frame
