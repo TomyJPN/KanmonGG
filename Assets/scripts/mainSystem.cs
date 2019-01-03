@@ -15,6 +15,7 @@ public class mainSystem : MonoBehaviour {
   public static bool isGameclear; //ミニゲームをクリアしたか
   public static bool[] kaihou=new bool[31];  //解放したか
   public static bool storyPlay;
+  public static string name;
 
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
@@ -48,6 +49,7 @@ public class mainSystem : MonoBehaviour {
     storyInstance = JsonHelper.FromJson<Story>(storyJson);
     Debug.Log("回線丼："+storyInstance[0].story);*/
 
+    //試験用のセーブデータ(要改善)
     saveLoad testData=new saveLoad();
     //testData.Save();
     for(int i = 0; i < 31; i++) {
@@ -55,6 +57,12 @@ public class mainSystem : MonoBehaviour {
     }
     kaihou[0] = true;
     testData.chara.kaihou = kaihou;
+    name=testData.chara.name ="関門太郎";
+    testData.chara.syogo = "カンモンマスター";
+    testData.chara.level = 10;
+    testData.chara.walkDistance = 1.3f;
+
+    
     testData.Save();
     testData.Load();
     kaihou = testData.chara.kaihou;

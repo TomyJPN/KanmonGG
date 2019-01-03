@@ -6,7 +6,16 @@ using Newtonsoft.Json;  //http://spi8823.hatenablog.com/entry/2016/04/16/001641
 class saveLoad : MonoBehaviour {
   public class saveData //キャラクターデータクラス
   {
-    public bool[] kaihou;
+    public string name; //プレイヤー名
+    public string syogo;  //称号
+    public int level; //レベル
+
+    public float walkDistance;  //歩いた距離
+    public int storyNum;  //解放ストーリー数
+    public int visitedNum;  //訪れた観光地数
+
+    public bool[] kaihou; //モンスターの解放(収集)
+
     /*public string userName = "デザートイーグル";
     public int userLV = 50;
     public int birthdayYear = 1979;
