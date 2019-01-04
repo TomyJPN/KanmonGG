@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
+using System;     //DateTime
 using Newtonsoft.Json;  //http://spi8823.hatenablog.com/entry/2016/04/16/001641
 
 //https://qiita.com/ryouhei_de/items/4551ee549d2cfe81c72f より
 
-class saveLoad : MonoBehaviour {
+public class saveLoad : MonoBehaviour {
   public class saveData //キャラクターデータクラス
   {
-    public string name; //プレイヤー名
-    public string syogo;  //称号
-    public int level; //レベル
+    public static string name; //プレイヤー名
+    public static string syogo;  //称号
+    public static int level; //レベル
+    public static DateTime startTime; //開始時間
 
-    public float walkDistance;  //歩いた距離
-    public int storyNum;  //解放ストーリー数
-    public int visitedNum;  //訪れた観光地数
+    public static float walkDistance;  //歩いた距離
+    public static int storyNum;  //解放ストーリー数
+    public static int visitedNum;  //訪れた観光地数
 
-    public bool[] kaihou; //モンスターの解放(収集)
+    public static bool[] kaihou=new bool[31]; //モンスターの解放(収集)
 
     /*public string userName = "デザートイーグル";
     public int userLV = 50;

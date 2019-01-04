@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 using UnityEngine.UI;
 
@@ -13,9 +14,8 @@ public class mainSystem : MonoBehaviour {
   public static Sprite[] charaSprits;
   public static int nowCharaID;   //現在進行中のストーリーID
   public static bool isGameclear; //ミニゲームをクリアしたか
-  public static bool[] kaihou=new bool[31];  //解放したか
   public static bool storyPlay;
-  public static string name;
+  //public static string name;
 
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
@@ -53,19 +53,16 @@ public class mainSystem : MonoBehaviour {
     saveLoad testData=new saveLoad();
     //testData.Save();
     for(int i = 0; i < 31; i++) {
-      kaihou[i] = false;
+      saveLoad.saveData.kaihou[i] = false;
     }
-    kaihou[0] = true;
-    testData.chara.kaihou = kaihou;
-    name=testData.chara.name ="関門太郎";
-    testData.chara.syogo = "カンモンマスター";
-    testData.chara.level = 10;
-    testData.chara.walkDistance = 1.3f;
-
-    
+    saveLoad.saveData.kaihou[0] = true;
+    saveLoad.saveData.name ="関門太郎";
+    saveLoad.saveData.syogo = "カンモンマスター";
+    saveLoad.saveData.level = 10;
+    saveLoad.saveData.walkDistance = 1.3f;
+    saveLoad.saveData.startTime = DateTime.Today;
     testData.Save();
     testData.Load();
-    kaihou = testData.chara.kaihou;
   }
 
   // Update is called once per frame
