@@ -61,6 +61,9 @@ public class mainSystem : MonoBehaviour {
     saveLoad.saveData.level = 10;
     saveLoad.saveData.walkDistance = 1.3f;
     saveLoad.saveData.startTime = DateTime.Today;
+    saveLoad.saveData.visitedNum = 3;
+    saveLoad.saveData.storyNum = 1; //とりあえず
+    saveLoad.saveData.monsterNum = 11;
     testData.Save();
     testData.Load();
   }

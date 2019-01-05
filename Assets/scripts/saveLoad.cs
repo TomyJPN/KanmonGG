@@ -15,6 +15,7 @@ public class saveLoad : MonoBehaviour {
     public static float walkDistance;  //歩いた距離
     public static int storyNum;  //解放ストーリー数
     public static int visitedNum;  //訪れた観光地数
+    public static int monsterNum; //解放モンスター数
 
     public static bool[] kaihou=new bool[31]; //モンスターの解放(収集)
 
