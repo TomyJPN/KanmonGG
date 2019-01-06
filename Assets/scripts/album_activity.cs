@@ -14,7 +14,7 @@ public class album_activity : MonoBehaviour {
   public GameObject descriptionObj;
   private Text text;
 
-  private int[] storyIDs = {0,3,5,10,20 };
+  private int[] storyIDs = {0,1,3,5,10,20 };
 
   // Use this for initialization
   void Start() {
@@ -61,7 +61,7 @@ public class album_activity : MonoBehaviour {
   void setDescription(string str) {
 
     descriptionObj.SetActive(true);
-    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description+mainSystem.kaihou[int.Parse(str)];
+    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description+saveLoad.saveData.kaihou[int.Parse(str)];
   }
 
   void playStory(string str) {

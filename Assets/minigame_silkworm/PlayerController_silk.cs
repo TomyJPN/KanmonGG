@@ -52,7 +52,7 @@ public class PlayerController_silk : MonoBehaviour {
         }
 
         //大きさ調整
-
-        this.transform.localScale = new Vector3(1 + (directorScript.score / 40), 1 + (directorScript.score / 40), 0);
+        //bug，一時無効
+        //this.transform.localScale = new Vector3(1 + (directorScript.score / 40), 1 + (directorScript.score / 40), 0);
     }
 }

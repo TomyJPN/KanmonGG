@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.IO;
 using UnityEngine.UI;
 
@@ -13,8 +14,8 @@ public class mainSystem : MonoBehaviour {
   public static Sprite[] charaSprits;
   public static int nowCharaID;   //現在進行中のストーリーID
   public static bool isGameclear; //ミニゲームをクリアしたか
-  public static bool[] kaihou=new bool[31];  //解放したか
   public static bool storyPlay;
+  //public static string name;
 
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
@@ -48,16 +49,23 @@ public class mainSystem : MonoBehaviour {
     storyInstance = JsonHelper.FromJson<Story>(storyJson);
     Debug.Log("回線丼："+storyInstance[0].story);*/
 
+    //試験用のセーブデータ(要改善)
     saveLoad testData=new saveLoad();
     //testData.Save();
     for(int i = 0; i < 31; i++) {
-      kaihou[i] = false;
+      saveLoad.saveData.kaihou[i] = false;
     }
-    kaihou[0] = true;
-    testData.chara.kaihou = kaihou;
+    saveLoad.saveData.kaihou[0] = true;
+    saveLoad.saveData.name ="関門太郎";
+    saveLoad.saveData.syogo = "カンモンマスター";
+    saveLoad.saveData.level = 10;
+    saveLoad.saveData.walkDistance = 1.3f;
+    saveLoad.saveData.startTime = DateTime.Today;
+    saveLoad.saveData.visitedNum = 3;
+    saveLoad.saveData.storyNum = 1; //とりあえず
+    saveLoad.saveData.monsterNum = 11;
     testData.Save();
     testData.Load();
-    kaihou = testData.chara.kaihou;
   }
 
   // Update is called once per frame
