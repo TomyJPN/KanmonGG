@@ -14,7 +14,7 @@ public class album_activity : MonoBehaviour {
   public GameObject descriptionObj;
   private Text text;
 
-  private int[] storyIDs = {0,3,5,10,20 };
+  private int[] storyIDs = {0,1,3,5,10,20 };
 
   // Use this for initialization
   void Start() {
