@@ -18,6 +18,7 @@ public class saveLoad : MonoBehaviour {
     public static int monsterNum; //解放モンスター数
 
     public static bool[] kaihou=new bool[31]; //モンスターの解放(収集)
+    public static bool notFirstGame;
 
     /*public string userName = "デザートイーグル";
     public int userLV = 50;

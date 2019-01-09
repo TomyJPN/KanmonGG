@@ -25,6 +25,9 @@ public class map_activity : MonoBehaviour {
     if (mainSystem.isGameclear || mainSystem.storyPlay) {
       tapCharactor(mainSystem.nowCharaID);
     }
+    else if (!saveLoad.saveData.notFirstGame) {
+      tapCharactor(0);
+    }
     onController = false;
     playerRg = player.GetComponent<Rigidbody2D>();
   }
@@ -73,21 +76,20 @@ public class map_activity : MonoBehaviour {
     showStory.text = story1[StoryNum];
 
     //画像変更
-    storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
+    if(saveLoad.saveData.notFirstGame)storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
   }
 
   public void tapText() {
     StoryNum++;
     if (StoryNum < story1.Length) { 
-      showStory.text = story1[StoryNum];
+      showStory.text = story1[StoryNum];  //次
     }
-    else if(StoryNum == story1.Length && !mainSystem.isGameclear) {
-      Debug.Log("end");
+    else if(StoryNum == story1.Length && !mainSystem.isGameclear && saveLoad.saveData.notFirstGame) { //前編終了
       storyBack.transform.Find("gameButton").gameObject.SetActive(true);
     }
-    else if (mainSystem.isGameclear) {
+    else{  //後編終了(か初期ストーリー終了)
       storyBack.SetActive(false);
-      storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+      if (saveLoad.saveData.notFirstGame) storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
       mainSystem.isGameclear = false;
       mainSystem.storyPlay = false;
     }

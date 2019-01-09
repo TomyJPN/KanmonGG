@@ -24,7 +24,6 @@ public class mainSystem : MonoBehaviour {
 
   void Start() {
     //charaJsonファイルの読み込み
-    //charaJson = File.ReadAllText("Assets/game_Data/charaData.json");
     charaJson = Resources.Load<TextAsset>("charaData").ToString();
     Debug.Log("loaded JSON file:");
     Debug.Log(charaJson);
@@ -34,11 +33,6 @@ public class mainSystem : MonoBehaviour {
     }
 
     charaSprits= Resources.LoadAll<Sprite>("chara/");
-    /*for(int i = 1; i <= 31; i++) {
-      string path = "chara/";
-      charaSprits[i] = Resources.Load<Sprite>(path+i+".png");
-      
-    }*/
     isGameclear = false;
     storyPlay = false;
 
@@ -49,7 +43,7 @@ public class mainSystem : MonoBehaviour {
     storyInstance = JsonHelper.FromJson<Story>(storyJson);
     Debug.Log("回線丼："+storyInstance[0].story);*/
 
-    //試験用のセーブデータ(要改善)
+    //------------試験用のセーブデータ(要改善)------------------
     saveLoad testData=new saveLoad();
     //testData.Save();
     for(int i = 0; i < 31; i++) {
@@ -66,6 +60,7 @@ public class mainSystem : MonoBehaviour {
     saveLoad.saveData.monsterNum = 11;
     testData.Save();
     testData.Load();
+    Debug.Log(saveLoad.saveData.notFirstGame);
   }
 
   // Update is called once per frame
