@@ -50,7 +50,6 @@ public class mainSystem : MonoBehaviour {
       saveLoad.saveData.kaihou[i] = false;
     }
     saveLoad.saveData.kaihou[0] = true;
-    saveLoad.saveData.name ="関門太郎";
     saveLoad.saveData.syogo = "カンモンマスター";
     saveLoad.saveData.level = 10;
     saveLoad.saveData.walkDistance = 1.3f;
@@ -58,8 +57,6 @@ public class mainSystem : MonoBehaviour {
     saveLoad.saveData.visitedNum = 3;
     saveLoad.saveData.storyNum = 1; //とりあえず
     saveLoad.saveData.monsterNum = 11;
-    testData.Save();
-    testData.Load();
     Debug.Log(saveLoad.saveData.notFirstGame);
   }
 

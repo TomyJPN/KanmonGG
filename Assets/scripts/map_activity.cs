@@ -89,7 +89,13 @@ public class map_activity : MonoBehaviour {
     }
     else{  //後編終了(か初期ストーリー終了)
       storyBack.SetActive(false);
-      if (saveLoad.saveData.notFirstGame) storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+      if (saveLoad.saveData.notFirstGame) {
+        storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+      }
+      else {
+        saveLoad.saveData.notFirstGame = true;
+        saveLoad.Save();
+      }
       mainSystem.isGameclear = false;
       mainSystem.storyPlay = false;
     }

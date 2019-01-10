@@ -27,12 +27,12 @@ public class saveLoad : MonoBehaviour {
     public int[] haitetsu = { 1, 2 };*/
   }
 
-  public saveData chara=new saveData(); //右辺こうしないとエラー出る
+  public static saveData chara=new saveData(); //右辺こうしないとエラー出る
 
   /// <summary>
   /// データの保存を行う
   /// </summary>
-  public void Save() {
+  public static void Save() {
     if (chara != null)//キャラデータがない場合不具合が発生している場合があるのでLogErrorとして通知しておく
     {
       string jsonStr = JsonConvert.SerializeObject(chara); //クラスをJson化
@@ -47,7 +47,7 @@ public class saveLoad : MonoBehaviour {
   /// <summary>
   /// データのロードを行う
   /// </summary>
-  public void Load() {
+  public static void Load() {
     string loadJsonStr = PlayerPrefs.GetString("playerData", ""); //データのロード　第2引数は設定されていなかった場合の空データ設定
     Debug.Log("Load："+loadJsonStr);
     if (string.IsNullOrEmpty(loadJsonStr)) //セーブデータがない場合無駄な処理を行わないためのif文
@@ -55,7 +55,7 @@ public class saveLoad : MonoBehaviour {
       Debug.Log("セーブデータはないよ！");
     }
     else {
-      saveData loadClass = JsonUtility.FromJson<saveData>(loadJsonStr);
+      chara = JsonUtility.FromJson<saveData>(loadJsonStr);
     }
 
   }
