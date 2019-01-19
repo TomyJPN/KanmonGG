@@ -25,7 +25,7 @@ public class map_activity : MonoBehaviour {
     if (mainSystem.isGameclear || mainSystem.storyPlay) {
       tapCharactor(mainSystem.nowCharaID);
     }
-    else if (!saveLoad.saveData.notFirstGame) {
+    else if (!mainSystem.savedata.notFirstGame) {
       tapCharactor(0);
     }
     onController = false;
@@ -51,7 +51,6 @@ public class map_activity : MonoBehaviour {
       float x = (float)Math.Cos(rad) * dis;
       playerRg.velocity = new Vector2(x, y);  //プレイヤー移動
     }
-    
   }
 
 
@@ -76,7 +75,7 @@ public class map_activity : MonoBehaviour {
     showStory.text = story1[StoryNum];
 
     //画像変更
-    if(saveLoad.saveData.notFirstGame)storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
+    if(mainSystem.savedata.notFirstGame)storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
   }
 
   public void tapText() {
@@ -84,17 +83,17 @@ public class map_activity : MonoBehaviour {
     if (StoryNum < story1.Length) { 
       showStory.text = story1[StoryNum];  //次
     }
-    else if(StoryNum == story1.Length && !mainSystem.isGameclear && saveLoad.saveData.notFirstGame) { //前編終了
+    else if(StoryNum == story1.Length && !mainSystem.isGameclear && mainSystem.savedata.notFirstGame) { //前編終了
       storyBack.transform.Find("gameButton").gameObject.SetActive(true);
     }
     else{  //後編終了(か初期ストーリー終了)
       storyBack.SetActive(false);
-      if (saveLoad.saveData.notFirstGame) {
+      if (mainSystem.savedata.notFirstGame) {
         storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
       }
       else {
-        saveLoad.saveData.notFirstGame = true;
-        saveLoad.Save();
+        mainSystem.savedata.notFirstGame = true;
+        mainSystem.dataSave();
       }
       mainSystem.isGameclear = false;
       mainSystem.storyPlay = false;

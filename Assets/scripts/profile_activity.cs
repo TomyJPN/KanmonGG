@@ -8,14 +8,14 @@ public class profile_activity : MonoBehaviour {
 
   // Use this for initialization
   void Start() {
-    textObj.transform.Find("name").GetComponent<Text>().text = saveLoad.saveData.name;
-    textObj.transform.Find("syogo").GetComponent<Text>().text = saveLoad.saveData.syogo;
-    textObj.transform.Find("level").GetComponent<Text>().text = saveLoad.saveData.level.ToString();
-    textObj.transform.Find("startDay").GetComponent<Text>().text = saveLoad.saveData.startTime.ToString();
-    textObj.transform.Find("walkDistance").GetComponent<Text>().text = saveLoad.saveData.walkDistance.ToString()+"km";
-    textObj.transform.Find("visitedNum").GetComponent<Text>().text = saveLoad.saveData.visitedNum.ToString() + "地点";
-    textObj.transform.Find("storyNum").GetComponent<Text>().text = saveLoad.saveData.storyNum.ToString() + "個";
-    textObj.transform.Find("monsterNum").GetComponent<Text>().text = saveLoad.saveData.monsterNum.ToString() + "体";
+    textObj.transform.Find("name").GetComponent<Text>().text = mainSystem.savedata.name;
+    textObj.transform.Find("syogo").GetComponent<Text>().text = mainSystem.savedata.syogo;
+    textObj.transform.Find("level").GetComponent<Text>().text = mainSystem.savedata.level.ToString();
+    textObj.transform.Find("startDay").GetComponent<Text>().text = mainSystem.savedata.startTime.ToString();
+    textObj.transform.Find("walkDistance").GetComponent<Text>().text = mainSystem.savedata.walkDistance.ToString()+"km";
+    textObj.transform.Find("visitedNum").GetComponent<Text>().text = mainSystem.savedata.visitedNum.ToString() + "地点";
+    textObj.transform.Find("storyNum").GetComponent<Text>().text = mainSystem.savedata.storyNum.ToString() + "個";
+    textObj.transform.Find("monsterNum").GetComponent<Text>().text = mainSystem.savedata.monsterNum.ToString() + "体";
   }
 
   // Update is called once per frame

@@ -36,7 +36,7 @@ public class saveLoad : MonoBehaviour {
     if (chara != null)//キャラデータがない場合不具合が発生している場合があるのでLogErrorとして通知しておく
     {
       string jsonStr = JsonConvert.SerializeObject(chara); //クラスをJson化
-      Debug.Log("save："+jsonStr);
+      Debug.Log("古いsave："+jsonStr);
       PlayerPrefs.SetString("playerData", jsonStr); //PlayerPrefsにデータを保存　　第1引数は任意
     }
     else {
@@ -49,7 +49,7 @@ public class saveLoad : MonoBehaviour {
   /// </summary>
   public static void Load() {
     string loadJsonStr = PlayerPrefs.GetString("playerData", ""); //データのロード　第2引数は設定されていなかった場合の空データ設定
-    Debug.Log("Load："+loadJsonStr);
+    Debug.Log("古いLoad："+loadJsonStr);
     if (string.IsNullOrEmpty(loadJsonStr)) //セーブデータがない場合無駄な処理を行わないためのif文
     {
       Debug.Log("セーブデータはないよ！");

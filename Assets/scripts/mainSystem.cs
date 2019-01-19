@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using UnityEngine.UI;
+using Newtonsoft.Json;
 
 public class mainSystem : MonoBehaviour {
   string charaJson;
@@ -17,54 +18,89 @@ public class mainSystem : MonoBehaviour {
   public static bool storyPlay;
   //public static string name;
 
+  //セーブ/////////////
+  public static saveData savedata = new saveData(); //右辺こうしないとエラー出る
+  public class saveData{ //キャラクターデータクラス
+    public string name; //プレイヤー名
+    public string syogo;  //称号
+    public int level; //レベル
+    public DateTime startTime; //開始時間
+    public float walkDistance;  //歩いた距離
+    public int storyNum;  //解放ストーリー数
+    public int visitedNum;  //訪れた観光地数
+    public int monsterNum; //解放モンスター数
+    public bool[] kaihou = new bool[31]; //モンスターの解放(収集)
+    public bool notFirstGame;
+  }
+ 
+  //データの保存を行う
+  public static void dataSave() {
+    if (savedata != null)//キャラデータがない場合不具合が発生している場合があるのでLogErrorとして通知しておく
+    {
+      string jsonStr = JsonConvert.SerializeObject(savedata); //クラスをJson化
+      Debug.Log("save：" + jsonStr);
+      PlayerPrefs.SetString("playerData", jsonStr); //PlayerPrefsにデータを保存　　第1引数は任意
+    }
+    else {
+      Debug.LogError("セーブデータがないよ！");
+    }
+  }
+  // データのロードを行う
+  public static void dataLoad() {
+    string loadJsonStr = PlayerPrefs.GetString("playerData", ""); //データのロード　第2引数は設定されていなかった場合の空データ設定
+    Debug.Log("Load：" + loadJsonStr);
+    if (string.IsNullOrEmpty(loadJsonStr)) //セーブデータがない場合無駄な処理を行わないためのif文
+    {
+      Debug.Log("セーブデータはないよ！");
+    }
+    else {
+      savedata = JsonUtility.FromJson<saveData>(loadJsonStr);
+    }
+  }
+  //  /////////////////
+
+
   void Awake() {
     DontDestroyOnLoad(this.gameObject);
-
   }
 
   void Start() {
     //charaJsonファイルの読み込み
     charaJson = Resources.Load<TextAsset>("charaData").ToString();
-    Debug.Log("loaded JSON file:");
-    Debug.Log(charaJson);
+    //Debug.Log("loaded JSON file:");
+    //Debug.Log(charaJson);
     itemInstance = JsonHelper.FromJson<Item>(charaJson);
-    for (int i = 0; i < itemInstance.Length; i++) {
+    /*for (int i = 0; i < itemInstance.Length; i++) {
       Debug.Log("id:"+itemInstance[i].id+"\nname:"+ itemInstance[i].name+"\ndescription:"+ itemInstance[i].description);
-    }
+    }*/
 
     charaSprits= Resources.LoadAll<Sprite>("chara/");
     isGameclear = false;
     storyPlay = false;
 
-    //storyJsonファイルの読み込み
-    /*storyJson = File.ReadAllText("Assets/game_Data/storyData.json");
-    Debug.Log("loaded JSON file:");
-    Debug.Log(storyJson);
-    storyInstance = JsonHelper.FromJson<Story>(storyJson);
-    Debug.Log("回線丼："+storyInstance[0].story);*/
-
     //------------試験用のセーブデータ(要改善)------------------
-    saveLoad testData=new saveLoad();
+    ///saveLoad testData=new saveLoad();
     //testData.Save();
-    for(int i = 0; i < 31; i++) {
-      saveLoad.saveData.kaihou[i] = false;
+    /*for(int i = 0; i < 31; i++) {
+      savedata.kaihou[i] = false;
     }
-    saveLoad.saveData.kaihou[0] = true;
-    saveLoad.saveData.syogo = "カンモンマスター";
-    saveLoad.saveData.level = 10;
-    saveLoad.saveData.walkDistance = 1.3f;
-    saveLoad.saveData.startTime = DateTime.Today;
-    saveLoad.saveData.visitedNum = 3;
-    saveLoad.saveData.storyNum = 1; //とりあえず
-    saveLoad.saveData.monsterNum = 11;
-    Debug.Log(saveLoad.saveData.notFirstGame);
+    savedata.kaihou[0] = true;
+    savedata.syogo = "カンモンマスター";
+    savedata.level = 10;
+    savedata.walkDistance = 1.3f;
+    savedata.startTime = DateTime.Today;
+    savedata.visitedNum = 3;
+    savedata.storyNum = 1; //とりあえず
+    savedata.monsterNum = 11;
+    dataSave();*/
+    dataLoad();
+    Debug.Log(savedata.notFirstGame);
   }
 
   // Update is called once per frame
   void Update() {
 
   }
-
 }
 
 
