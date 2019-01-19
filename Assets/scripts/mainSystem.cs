@@ -78,12 +78,21 @@ public class mainSystem : MonoBehaviour {
     isGameclear = false;
     storyPlay = false;
 
-    //------------試験用のセーブデータ(要改善)------------------
-    ///saveLoad testData=new saveLoad();
-    //testData.Save();
-    /*for(int i = 0; i < 31; i++) {
+    dataLoad();
+    Debug.Log(savedata.notFirstGame);
+  }
+
+  // Update is called once per frame
+  void Update() {
+
+  }
+
+  //テスト用初期データ
+  public void dataReset() {
+    for(int i = 0; i < 31; i++) {
       savedata.kaihou[i] = false;
     }
+    savedata.notFirstGame = false;
     savedata.kaihou[0] = true;
     savedata.syogo = "カンモンマスター";
     savedata.level = 10;
@@ -92,14 +101,7 @@ public class mainSystem : MonoBehaviour {
     savedata.visitedNum = 3;
     savedata.storyNum = 1; //とりあえず
     savedata.monsterNum = 11;
-    dataSave();*/
-    dataLoad();
-    Debug.Log(savedata.notFirstGame);
-  }
-
-  // Update is called once per frame
-  void Update() {
-
+    dataSave();
   }
 }
 
@@ -116,3 +118,4 @@ public class Story {
   public int id;
   public string story;
 }
+
