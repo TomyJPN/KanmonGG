@@ -11,6 +11,7 @@ public class map_activity : MonoBehaviour {
   string[] story1;
   public Text showStory;   //反映してるストーリー文
   private int StoryNum;   //タップ数
+  public GameObject background;
   //public GameObject canvas;  //canvas
 
   public GameObject Player;
@@ -19,6 +20,8 @@ public class map_activity : MonoBehaviour {
   Vector3 controllerPos;
   public GameObject player;
   private Rigidbody2D playerRg;
+
+  public Sprite manImg;
 
   // Use this for initialization
   void Start() {
@@ -75,7 +78,8 @@ public class map_activity : MonoBehaviour {
     showStory.text = story1[StoryNum];
 
     //画像変更
-    if(mainSystem.savedata.notFirstGame)storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
+    if (mainSystem.savedata.notFirstGame) storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId - 1];
+    else storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite =manImg;
   }
 
   public void tapText() {
@@ -85,6 +89,7 @@ public class map_activity : MonoBehaviour {
     }
     else if(StoryNum == story1.Length && !mainSystem.isGameclear && mainSystem.savedata.notFirstGame) { //前編終了
       storyBack.transform.Find("gameButton").gameObject.SetActive(true);
+      background.SetActive(true);
     }
     else{  //後編終了(か初期ストーリー終了)
       storyBack.SetActive(false);
