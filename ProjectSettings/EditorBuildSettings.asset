@@ -26,10 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/help.unity
     guid: 2337141b6f3b87d4fad34f940b2c5c4d
-  - enabled: 0
+  - enabled: 1
     path: Assets/minigame_blowfish/blowfishGame.unity
     guid: d4307bd037f716f458945b7b10317a54
-  - enabled: 0
+  - enabled: 1
     path: Assets/minigame_silkworm/silkwormGame.unity
     guid: d2e33159bdcb49246a152cc44969af05
   m_configObjects: {}

@@ -92,15 +92,15 @@ public class mainSystem : MonoBehaviour {
     for(int i = 0; i < 31; i++) {
       savedata.kaihou[i] = false;
     }
+    savedata.name = "関門太郎";
     savedata.notFirstGame = false;
-    savedata.kaihou[0] = true;
-    savedata.syogo = "カンモンマスター";
-    savedata.level = 10;
-    savedata.walkDistance = 1.3f;
+    savedata.syogo = "ベータ版プレイヤー";
+    savedata.level = 1;
+    savedata.walkDistance =0;
     savedata.startTime = DateTime.Today;
-    savedata.visitedNum = 3;
-    savedata.storyNum = 1; //とりあえず
-    savedata.monsterNum = 11;
+    savedata.visitedNum = 0;
+    savedata.storyNum = 0; //とりあえず
+    savedata.monsterNum = 0;
     dataSave();
   }
 }

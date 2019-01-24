@@ -61,7 +61,13 @@ public class album_activity : MonoBehaviour {
   void setDescription(string str) {
 
     descriptionObj.SetActive(true);
-    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description + mainSystem.savedata.kaihou[int.Parse(str)];
+    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description ;
+    if (mainSystem.savedata.kaihou[int.Parse(str)]) {
+      text.text += "\n\n解放済み";
+    }
+    else {
+      text.text += "\n\n未解放";
+    }
   }
 
   void playStory(string str) {

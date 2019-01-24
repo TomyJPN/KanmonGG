@@ -33,6 +33,15 @@ public class map_activity : MonoBehaviour {
     }
     onController = false;
     playerRg = player.GetComponent<Rigidbody2D>();
+
+    GameObject charas=GameObject.Find("Canvas/MAPImage/charas").gameObject;
+    for(int i=0; i < charas.transform.childCount; i++) {
+      GameObject child = charas.transform.GetChild(i).gameObject;
+      int num = int.Parse(child.name) - 1;
+      if (mainSystem.savedata.kaihou[num] == true) {
+        child.SetActive(false);
+      }
+    }
   }
 
   // Update is called once per frame
@@ -95,6 +104,10 @@ public class map_activity : MonoBehaviour {
       storyBack.SetActive(false);
       if (mainSystem.savedata.notFirstGame) {
         storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+        mainSystem.savedata.kaihou[mainSystem.nowCharaID-1] = true;
+        Debug.Log("キャラ開放；"+ (mainSystem.nowCharaID-1));
+        //mainSystem.savedata.monsterNum++; 
+        mainSystem.dataSave();
       }
       else {
         mainSystem.savedata.notFirstGame = true;
