@@ -16,6 +16,7 @@ public class mainSystem : MonoBehaviour {
   public static int nowCharaID;   //現在進行中のストーリーID
   public static bool isGameclear; //ミニゲームをクリアしたか
   public static bool storyPlay;
+  public static Vector3 playerPos;
   //public static string name;
 
   //セーブ/////////////
@@ -65,18 +66,18 @@ public class mainSystem : MonoBehaviour {
   }
 
   void Start() {
+    if (!savedata.notFirstGame) dataReset();
+
     //charaJsonファイルの読み込み
     charaJson = Resources.Load<TextAsset>("charaData").ToString();
     //Debug.Log("loaded JSON file:");
     //Debug.Log(charaJson);
     itemInstance = JsonHelper.FromJson<Item>(charaJson);
-    /*for (int i = 0; i < itemInstance.Length; i++) {
-      Debug.Log("id:"+itemInstance[i].id+"\nname:"+ itemInstance[i].name+"\ndescription:"+ itemInstance[i].description);
-    }*/
-
     charaSprits= Resources.LoadAll<Sprite>("chara/");
     isGameclear = false;
     storyPlay = false;
+
+    playerPos = new Vector3(464f, 374f, 0);
 
     dataLoad();
     Debug.Log(savedata.notFirstGame);

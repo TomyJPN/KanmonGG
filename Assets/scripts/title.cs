@@ -12,7 +12,7 @@ public class title : MonoBehaviour {
     mainSystem.dataLoad();
     if (!mainSystem.savedata.notFirstGame) {
       // キーボードを表示する
-      this.keyboard = TouchScreenKeyboard.Open(saveLoad.saveData.name, TouchScreenKeyboardType.Default);
+      //this.keyboard = TouchScreenKeyboard.Open(saveLoad.saveData.name, TouchScreenKeyboardType.Default);
       mainSystem.savedata.startTime = DateTime.Now;
       mainSystem.dataSave();
     }

@@ -14,7 +14,6 @@ public class map_activity : MonoBehaviour {
   public GameObject background;
   //public GameObject canvas;  //canvas
 
-  public GameObject Player;
   public GameObject controller;
   private bool onController;
   Vector3 controllerPos;
@@ -35,13 +34,20 @@ public class map_activity : MonoBehaviour {
     playerRg = player.GetComponent<Rigidbody2D>();
 
     GameObject charas=GameObject.Find("Canvas/MAPImage/charas").gameObject;
-    for(int i=0; i < charas.transform.childCount; i++) {
+    int level=1;  //クソ実装
+    for (int i=0; i < charas.transform.childCount; i++) {
       GameObject child = charas.transform.GetChild(i).gameObject;
       int num = int.Parse(child.name) - 1;
       if (mainSystem.savedata.kaihou[num] == true) {
         child.SetActive(false);
+        level++;
       }
     }
+    mainSystem.savedata.level = level;
+    mainSystem.dataSave();
+    //Debug.Log(player.transform.position);
+   //player.transform.position = mainSystem.playerPos;  //最後にいた地点にプレイヤーを置く
+    //Debug.Log(player.transform.position);
   }
 
   // Update is called once per frame
@@ -61,7 +67,7 @@ public class map_activity : MonoBehaviour {
       }
       float y = (float)Math.Sin(rad) * dis; //角度と距離から，指定半径の座標を出す
       float x = (float)Math.Cos(rad) * dis;
-      playerRg.velocity = new Vector2(x, y);  //プレイヤー移動
+      playerRg.velocity = new Vector2(x*1.2f, y*1.2f);  //プレイヤー移動
     }
   }
 
@@ -137,6 +143,8 @@ public class map_activity : MonoBehaviour {
     onController = false;
     controller.transform.position = controllerPos;
     playerRg.velocity = new Vector2(0, 0);
+    //mainSystem.playerPos = player.transform.position;
+    //Debug.Log(player.transform.position);
   }
   //2点間の距離
   protected float getDistance(double x, double y, double x2, double y2) {
