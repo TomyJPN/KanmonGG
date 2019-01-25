@@ -11,22 +11,43 @@ public class map_activity : MonoBehaviour {
   string[] story1;
   public Text showStory;   //反映してるストーリー文
   private int StoryNum;   //タップ数
+  public GameObject background;
   //public GameObject canvas;  //canvas
 
-  public GameObject Player;
   public GameObject controller;
   private bool onController;
   Vector3 controllerPos;
   public GameObject player;
   private Rigidbody2D playerRg;
 
+  public Sprite manImg;
+
   // Use this for initialization
   void Start() {
     if (mainSystem.isGameclear || mainSystem.storyPlay) {
       tapCharactor(mainSystem.nowCharaID);
     }
+    else if (!mainSystem.savedata.notFirstGame) {
+      tapCharactor(0);
+    }
     onController = false;
     playerRg = player.GetComponent<Rigidbody2D>();
+
+    GameObject charas=GameObject.Find("Canvas/MAPImage/charas").gameObject;
+    int level=1;  //クソ実装
+    for (int i=0; i < charas.transform.childCount; i++) {
+      GameObject child = charas.transform.GetChild(i).gameObject;
+      int num = int.Parse(child.name) - 1;
+      if (mainSystem.savedata.kaihou[num] == true) {
+        child.SetActive(false);
+        level++;
+      }
+    }
+    mainSystem.savedata.level = level;
+    mainSystem.dataSave();
+    //Debug.Log(player.transform.position);
+   //player.transform.position = mainSystem.playerPos;  //最後にいた地点にプレイヤーを置く
+    //Debug.Log(player.transform.position);
   }
 
   // Update is called once per frame
@@ -46,9 +67,8 @@ public class map_activity : MonoBehaviour {
       }
       float y = (float)Math.Sin(rad) * dis; //角度と距離から，指定半径の座標を出す
       float x = (float)Math.Cos(rad) * dis;
-      playerRg.velocity = new Vector2(x, y);  //プレイヤー移動
+      playerRg.velocity = new Vector2(x*1.2f, y*1.2f);  //プレイヤー移動
     }
-    
   }
 
 
@@ -73,21 +93,32 @@ public class map_activity : MonoBehaviour {
     showStory.text = story1[StoryNum];
 
     //画像変更
-    storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId-1];
+    if (mainSystem.savedata.notFirstGame) storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite = mainSystem.charaSprits[charaId - 1];
+    else storyBack.transform.Find("charaImage").gameObject.GetComponent<Image>().sprite =manImg;
   }
 
   public void tapText() {
     StoryNum++;
     if (StoryNum < story1.Length) { 
-      showStory.text = story1[StoryNum];
+      showStory.text = story1[StoryNum];  //次
     }
-    else if(StoryNum == story1.Length && !mainSystem.isGameclear) {
-      Debug.Log("end");
+    else if(StoryNum == story1.Length && !mainSystem.isGameclear && mainSystem.savedata.notFirstGame) { //前編終了
       storyBack.transform.Find("gameButton").gameObject.SetActive(true);
+      background.SetActive(true);
     }
-    else if (mainSystem.isGameclear) {
+    else{  //後編終了(か初期ストーリー終了)
       storyBack.SetActive(false);
-      storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+      if (mainSystem.savedata.notFirstGame) {
+        storyBack.transform.root.transform.Find("MAPImage/charas/" + mainSystem.nowCharaID).gameObject.SetActive(false);
+        mainSystem.savedata.kaihou[mainSystem.nowCharaID-1] = true;
+        Debug.Log("キャラ開放；"+ (mainSystem.nowCharaID-1));
+        //mainSystem.savedata.monsterNum++; 
+        mainSystem.dataSave();
+      }
+      else {
+        mainSystem.savedata.notFirstGame = true;
+        mainSystem.dataSave();
+      }
       mainSystem.isGameclear = false;
       mainSystem.storyPlay = false;
     }
@@ -112,6 +143,8 @@ public class map_activity : MonoBehaviour {
     onController = false;
     controller.transform.position = controllerPos;
     playerRg.velocity = new Vector2(0, 0);
+    //mainSystem.playerPos = player.transform.position;
+    //Debug.Log(player.transform.position);
   }
   //2点間の距離
   protected float getDistance(double x, double y, double x2, double y2) {

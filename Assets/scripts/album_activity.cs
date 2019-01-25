@@ -35,19 +35,20 @@ public class album_activity : MonoBehaviour {
 
     }
     //ストーリーの生成
-    for(int i = 0; i < storyIDs.Length; i++) {
-      GameObject Item;
-      content = GameObject.Find("Canvas/story/ScrollView/Content"); //生成する場所
-      Item = Instantiate(NodeStory, content.transform);
-      Item.transform.Find("name").gameObject.GetComponent<Text>().text = mainSystem.itemInstance[storyIDs[i]].name;
-      Item.transform.Find("number").gameObject.GetComponent<Text>().text = "No."+storyIDs[i].ToString();
-      //画像
-      Image btnImage = Item.transform.Find("Image").gameObject.GetComponent<Image>();
-      if (mainSystem.charaSprits.Length > i) btnImage.sprite = mainSystem.charaSprits[storyIDs[i]]; //これなんだっけ
+    for (int i = 0; i < storyIDs.Length; i++) {
+      if (mainSystem.savedata.kaihou[storyIDs[i]]) {
+        GameObject Item;
+        content = GameObject.Find("Canvas/story/ScrollView/Content"); //生成する場所
+        Item = Instantiate(NodeStory, content.transform);
+        Item.transform.Find("name").gameObject.GetComponent<Text>().text = mainSystem.itemInstance[storyIDs[i]].name;
+        Item.transform.Find("number").gameObject.GetComponent<Text>().text = "No." + storyIDs[i].ToString();
+        //画像
+        Image btnImage = Item.transform.Find("Image").gameObject.GetComponent<Image>();
+        if (mainSystem.charaSprits.Length > i) btnImage.sprite = mainSystem.charaSprits[storyIDs[i]]; //これなんだっけ
 
-      string tmp = storyIDs[i].ToString();
-      Item.GetComponent<Button>().onClick.AddListener(() => { playStory(tmp); }); //ラムダ式とかいうやつhttps://toshusai.hatenablog.com/entry/2017/11/08/213641
-
+        string tmp = storyIDs[i].ToString();
+        Item.GetComponent<Button>().onClick.AddListener(() => { playStory(tmp); }); //ラムダ式とかいうやつhttps://toshusai.hatenablog.com/entry/2017/11/08/213641
+      }
     }
     storyLay.SetActive(false);  //storyレイヤ
   }
@@ -61,7 +62,13 @@ public class album_activity : MonoBehaviour {
   void setDescription(string str) {
 
     descriptionObj.SetActive(true);
-    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description+saveLoad.saveData.kaihou[int.Parse(str)];
+    text.text = mainSystem.itemInstance[int.Parse(str)].name + "\n\n" + mainSystem.itemInstance[int.Parse(str)].description ;
+    if (mainSystem.savedata.kaihou[int.Parse(str)]) {
+      text.text += "\n\n解放済み";
+    }
+    else {
+      text.text += "\n\n未解放";
+    }
   }
 
   void playStory(string str) {

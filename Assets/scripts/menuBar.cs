@@ -25,14 +25,17 @@ public class menuBar : MonoBehaviour {
   }
   public void buttonProfiel() {
     Debug.Log("profiel");
+    mainSystem.dataSave();
     SceneManager.LoadScene("profile");
   }
   public void buttonAlbum() {
     Debug.Log("album");
+    mainSystem.dataSave();
     SceneManager.LoadScene("album");
   }
   public void buttonHelp() {
     Debug.Log("help");
+    mainSystem.dataSave();
     SceneManager.LoadScene("help");
   }
 

@@ -14,6 +14,7 @@ public class DirectorScript : MonoBehaviour {
   public GameObject timeTextObj;
   public GameObject resultObj;
   public GameObject silkworm;
+  public Sprite changeSprite;
 
   public static bool isEnd;
 
@@ -33,7 +34,7 @@ public class DirectorScript : MonoBehaviour {
       spawnTime++;
       totalTime -= Time.deltaTime;
       if (score == 35) {
-        silkworm.GetComponent<SpriteRenderer>().sprite = mainSystem.charaSprits[8];
+        silkworm.GetComponent<SpriteRenderer>().sprite = changeSprite;
       }
     }
     else {
